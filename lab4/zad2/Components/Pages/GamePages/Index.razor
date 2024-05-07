@@ -4,6 +4,8 @@
 @using Microsoft.AspNetCore.Components.QuickGrid
 @inject zad2.Data.ApplicationDbContext DB
 @using zad2.Data
+@attribute [StreamRendering]
+@rendermode InteractiveServer
 @* @attribute [Authorize] *@
 
 <PageTitle>Index</PageTitle>
@@ -19,10 +21,11 @@
 
 
 <QuickGrid Class="table" Items="DB.Game">
-    <PropertyColumn Property="game => game.Title" />
-    <PropertyColumn Property="game => game.Description" />
-    <PropertyColumn Property="game => game.Relese" />
-    <PropertyColumn Property="game => game.Rate" />
+    <PropertyColumn Property="game => game.Title" Sortable="true"/>
+    @* <PropertyColumn Property="game => game.Description" Sortable="true" /> *@
+    <PropertyColumn Property="game => game.Relese" Sortable="true" />
+    <PropertyColumn Property="game => game.Rate" Sortable="true" />
+    <PropertyColumn Property="game => game.NoRates" Sortable="true" />
 
     <TemplateColumn Context="game">
         <AuthorizeView>

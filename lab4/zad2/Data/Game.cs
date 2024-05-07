@@ -8,6 +8,8 @@ namespace zad2.Data {
         [DataType(DataType.Date)]
         public DateTime? Relese { get; set; }
         public float Rate { get; set; }
+        public int NoRates {  get; set; }
+        public string url { get; set; }
 
     }
 }

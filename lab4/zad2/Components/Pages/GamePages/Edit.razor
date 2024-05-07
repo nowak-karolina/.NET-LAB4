@@ -40,11 +40,6 @@ else
                     <InputDate id="relese" @bind-Value="Game.Relese" class="form-control" />
                     <ValidationMessage For="() => Game.Relese" class="text-danger" />
                 </div>
-                <div class="mb-3">
-                    <label for="rate" class="form-label">Rate:</label>
-                    <InputNumber id="rate" @bind-Value="Game.Rate" class="form-control" />
-                    <ValidationMessage For="() => Game.Rate" class="text-danger" />
-                </div>
                 <button type="submit" class="btn btn-primary">Save</button>
             </EditForm>
         </div>
@@ -62,6 +57,10 @@ else
     [SupplyParameterFromForm]
     public Game? Game { get; set; }
 
+    public string newTitle { get; set; }
+    public string newDescription { get; set; }
+    public DateTime newDate { get;set; }
+
     protected override async Task OnInitializedAsync()
     {
         Game ??= await DB.Game.FirstOrDefaultAsync(m => m.Id == Id);
@@ -77,6 +76,8 @@ else
     public async Task UpdateGame()
     {
         DB.Attach(Game!).State = EntityState.Modified;
+        Game.Rate = Game.Rate;
+        Game.NoRates = Game.NoRates;
 
         try
         {

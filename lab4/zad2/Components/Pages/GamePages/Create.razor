@@ -34,9 +34,14 @@
             </div>        
             <div class="mb-3">
                 <label for="rate" class="form-label">Rate:</label> 
-                <InputNumber id="rate" @bind-Value="Game.Rate" class="form-control" /> 
+                <InputNumber id="rate" @bind-Value="Game.Rate" class="form-control" EnableMinMax="true" Min="0" Max="10" />
                 <ValidationMessage For="() => Game.Rate" class="text-danger" /> 
-            </div>        
+            </div>
+            <div class="mb-3">
+                <label for="url" class="form-label">URL:</label>
+                <InputText id="url" @bind-Value="Game.url" class="form-control" />
+                <ValidationMessage For="() => Game.url" class="text-danger" />
+            </div>
             <button type="submit" class="btn btn-primary">Create</button>
         </EditForm>
     </div>
@@ -55,6 +60,7 @@
     public async Task AddGame()
     {
         DB.Game.Add(Game);
+        Game.NoRates += 1;
         await DB.SaveChangesAsync();
         NavigationManager.NavigateTo("/games");
     }
